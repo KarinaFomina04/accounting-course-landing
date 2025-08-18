@@ -1,0 +1,103 @@
+.container { width: min(1120px, 92%); margin: 0 auto; }
+
+.sticky {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+
+.containerLinks { display:flex; gap:20px; }
+
+.linkButton {
+  display:flex; align-items:center; font-size:18px;
+  text-decoration:none; color:var(--espresso); font-weight:600;
+  transition: transform .18s ease;
+}
+.linkButton:hover, .linkButton:focus { transform: translateY(-2px); }
+
+.logo {
+  font-family:"Playfair Display";
+  font-size: 20px;
+  font-weight: 800;
+  color:var(--espresso);
+  letter-spacing:.3px;
+  @media (min-width: 980px) {
+    font-size: 25px;
+  }
+}
+
+/* ========== Mobile actions (Telegram + burger) ========== */
+.mobileActions { display: none; align-items: center; gap: 12px; }
+
+.tgIcon {
+  display: inline-grid; place-items: center;
+  width: 42px; height: 42px; border-radius: 10px;
+  background: #fff; border: 1px solid rgba(0,0,0,.08);
+}
+.tgIcon svg { width: 22px; height: 22px; display:block; }
+
+/* Burger button */
+.burger {
+  display: none;
+  width: 44px; height: 44px; padding: 0; border: 0;
+  background: #fff; border: 1px solid rgba(0,0,0,.08);
+  border-radius: 10px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  color: var(--espresso);
+
+  span {
+    display: block; width: 24px; height: 3px; margin: 0 auto;
+    background: currentColor; border-radius: 3px;
+    transition: transform .22s ease, opacity .2s ease;
+  }
+  span + span { margin-top: 6px; }
+}
+
+/* превращаемся в "X", остаёмся на месте (без position: fixed) */
+.burger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* ========== Mobile slide-down menu ========== */
+.mobileMenu {
+  position: fixed;
+  top: var(--header-h, 72px); left: 0; right: 0; bottom: 0;
+  z-index: 1060;
+ // background: var(--snow-white);         /* запрошенный фон */
+  transform: translateY(-8px);
+  opacity: 0; pointer-events: none;
+  transition: transform .2s ease, opacity .2s ease;
+ // padding: 18px clamp(16px, 5vw, 24px);
+  display: flex;
+  flex-direction: column;
+ // gap: 12px;
+}
+.mobileMenu.open { transform: none; opacity: 1; pointer-events: auto; background-color: var(--snow-white);}
+
+.mLink {
+  background-color: var(--snow-white);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--espresso);
+  text-decoration: none;
+  padding: 14px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* overlay */
+.overlay {
+  position: fixed; inset: var(--header-h, 72px) 0 0 0;
+  z-index: 1050;
+  background: rgba(0,0,0,.35);
+  opacity: 0; pointer-events: none; transition: opacity .18s ease;
+}
+.overlay.open { opacity: 1; pointer-events: auto; }
+
+/* responsive: на мобилке показываем блок действий, скрываем десктоп-меню */
+@media (max-width: 920px) {
+  .containerLinks { display: none; }
+  .mobileActions { display: inline-flex; }
+  .burger { display: inline-block; }
+}

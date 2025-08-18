@@ -1,0 +1,43 @@
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+.section {
+  background: var(--snow-white);
+}
+
+.title {
+  font-size: clamp(24px, 3.2vw, 36px);
+  margin: 0 0 10px;
+  color: var(--espresso);
+}
+
+.lead {
+  opacity: .85;
+  max-width: 740px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    border: 1px solid rgba(0,0,0,.08);
+    padding: 16px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  thead th {
+    background: var(--arctic-paradise);
+    color: var(--espresso);
+  }
+}
+
+.note {
+  font-size: 14px;
+  opacity: .8;
+  margin-top: 16px;
+}

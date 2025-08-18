@@ -1,0 +1,41 @@
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  display:flex;
+  align-items:center;
+  color:white;
+  background: linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.45)), url('/img/hero-bg.png') center/cover no-repeat;
+}
+
+.mainText{
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 1.1;
+  margin: 0 0 18px;
+  text-shadow: 0 3px 24px rgba(0,0,0,.45);
+}
+
+.descriptionText {
+  max-width: 860px;
+  font-size: clamp(16px, 2.2vw, 20px);
+  opacity: .95;
+}
+
+.btnSelectTariff {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: var(--arctic-paradise);
+  color: var(--espresso);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .2s ease;
+  &:hover {
+    transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  }
+  &:active { transform: translateY(0); }
+}
