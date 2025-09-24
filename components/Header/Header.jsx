@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import s from './Header.module.scss';
-import TelegramButton from "../TelegramButton/TelegramButton";
+import TelegramButton from '../TelegramButton/TelegramButton';
 
 function Portal({ children }) {
     const [mounted, setMounted] = useState(false);
@@ -14,9 +16,13 @@ function Portal({ children }) {
 
 export default function Header() {
     const [open, setOpen] = useState(false);
+    const pathname = usePathname();
     const tgHref = process.env.NEXT_PUBLIC_TG_LINK || 'https://t.me/your_fallback';
 
-    // Esc + lock scroll
+    // Закрывать меню при смене маршрута
+    useEffect(() => setOpen(false), [pathname]);
+
+    // Esc + lock/unlock scroll
     useEffect(() => {
         const onEsc = (e) => e.key === 'Escape' && setOpen(false);
         window.addEventListener('keydown', onEsc);
@@ -38,9 +44,7 @@ export default function Header() {
             if (top) window.scrollTo(0, -parseInt(top || '0', 10));
         }
 
-        return () => {
-            window.removeEventListener('keydown', onEsc);
-        };
+        return () => window.removeEventListener('keydown', onEsc);
     }, [open]);
 
     const close = () => setOpen(false);
@@ -50,13 +54,21 @@ export default function Header() {
             <header className={s.sticky}>
                 <div className={s.container}>
                     <div className={s.row}>
-                        <div className={s.logo}>ИП Фомина Кристина Александровна</div>
+                        <Link
+                            href="/"
+                            className={s.logo}
+                            aria-label="На главную"
+                            onClick={close}
+                        >
+                            ИП Фомина Кристина Александровна
+                        </Link>
 
-                        {/* Desktop navigation */}
+                        {/* Desktop navigation — роуты, без якорей */}
                         <nav className={s.containerLinks} aria-label="Основная навигация">
-                            <a href="#services" className={s.linkButton}>Услуги</a>
-                            <a href="#course-content" className={s.linkButton}>Программа курса</a>
-                            <a href="#pricing" className={s.linkButton}>Тарифы</a>
+                            <Link href="/services" className={s.linkButton} onClick={close}>Услуги</Link>
+                            <Link href="/course-content" className={s.linkButton} onClick={close}>Программа курса</Link>
+                            <Link href="/pricing" className={s.linkButton} onClick={close}>Тарифы</Link>
+                            <Link href="/contact-form" className={s.linkButton} onClick={close}>Заказать консультацию</Link>
                             <TelegramButton />
                         </nav>
 
@@ -99,9 +111,10 @@ export default function Header() {
                     role="dialog"
                     aria-modal="true"
                 >
-                    <a href="#services" className={s.mLink} onClick={close}>Услуги</a>
-                    <a href="#course-content" className={s.mLink} onClick={close}>Программа курса</a>
-                    <a href="#pricing" className={s.mLink} onClick={close}>Тарифы</a>
+                    <Link href="/services" className={s.mLink} onClick={close}>Услуги</Link>
+                    <Link href="/course-content" className={s.mLink} onClick={close}>Программа курса</Link>
+                    <Link href="/pricing" className={s.mLink} onClick={close}>Тарифы</Link>
+                    <Link href="/contact-form" className={s.linkButton} onClick={close}>Заказать консультацию</Link>
                 </nav>
             </Portal>
         </>

@@ -1,90 +1,107 @@
-.section {
+.wrapper {
   background: var(--snow-white);
-  padding: 14px 0;
-  @media (min-width: 980px) {
-    padding: 0;
+  color: var(--espresso);
+  padding: clamp(16px, 4vw, 32px);
+  border: 1px solid color-mix(in srgb, var(--espresso) 15%, transparent);
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 24px auto;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--espresso) 12%, transparent);
+}
+
+/* фиксированный заголовок внутри карточки */
+.title {
+  margin: 0;
+  font-size: clamp(24px, 3.2vw, 36px);
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--arctic-paradise);
+  position: sticky;
+  top: 0;
+  background: var(--snow-white);
+  z-index: 1;
+}
+
+/* ПРОКРУЧИВАЕМАЯ ОБЛАСТЬ
+   — берём до 75vh высоты экрана (на мобилках чуть выше),
+   — всегда показываем вертикальный скролл, если контент длинный */
+.scrollArea {
+  max-height: 75vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px; /* чтобы контент не прилипал к полосе скролла */
+
+  @media (max-width: 640px) {
+    max-height: 80vh;
+  }
+
+  /* тонкая кастомизация скроллбара (не глобальная, только внутри блока) */
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: var(--arctic-paradise) #ffffff;
+  &::-webkit-scrollbar { width: 10px; }
+  &::-webkit-scrollbar-track { background: #ffffff; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--arctic-paradise);
+    border-radius: 8px;
   }
 }
 
-.title {
-  font-size: clamp(26px, 3.2vw, 40px);
-  margin: 0 0 16px;
-  color: var(--espresso);
-}
-
-/* сетка: 1 колонка на мобиле, 2 на десктопе */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-.col { display: grid; gap: 12px; }
-
-@media (min-width: 980px) {
-  .grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-}
-
-.item {
-  background: #fff;
-  border: 1px solid rgba(0,0,0,.06);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.06);
-  overflow: hidden;
-}
-
-.summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 20px;
-  cursor: pointer;
+/* список и карточки пунктов */
+.list {
+  counter-reset: item;
   list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+
+  > li {
+    position: relative;
+    padding: 14px 16px 14px 56px;
+    margin: 10px 0;
+    background: #ffffff;
+    border: 1px solid color-mix(in srgb, var(--arctic-paradise) 45%, transparent);
+    border-left: 6px solid var(--arctic-paradise);
+    border-radius: 14px;
+
+    &::before {
+      counter-increment: item;
+      content: counter(item) ".";
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--espresso);
+      opacity: 0.9;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: clamp(16px, 2.2vw, 20px);
+      line-height: 1.35;
+    }
+
+    ul {
+      margin: 8px 0 0 0;
+      padding-left: 18px;
+      list-style: disc;
+
+      li {
+        margin: 4px 0;
+        line-height: 1.4;
+      }
+    }
+  }
 }
 
-.heading {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 700;
-  color: var(--text);
-}
+/* две колонки на широких экранах */
+.twoCols {
+  columns: 2;
+  column-gap: 24px;
 
-.num {
-  --size: 36px;
-  flex: 0 0 var(--size);
-  width: var(--size);
-  height: var(--size);
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--arctic-paradise);
-  color: var(--espresso);
-  font-weight: 800;
-}
+  li { break-inside: avoid; }
 
-.chevron {
-  width: 18px; height: 18px;
-  border-right: 2px solid rgba(0,0,0,.6);
-  border-bottom: 2px solid rgba(0,0,0,.6);
-  transform: rotate(-45deg);
-  transition: transform .18s ease;
-}
-.item[open] .chevron { transform: rotate(135deg); }
-
-.sublist {
-  padding: 0 24px 18px 64px;
-  margin: 0;
-  display: grid;
-  gap: 8px;
-}
-.sublist li { line-height: 1.5; }
-
-.plain .summary { cursor: default; }
-.plain .chevron { display: none; }
-
-.summary:focus-visible {
-  outline: 2px solid var(--arctic-paradise);
-  outline-offset: 4px;
+  @media (max-width: 640px) {
+    columns: 1;
+  }
 }

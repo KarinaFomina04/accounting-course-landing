@@ -1,76 +1,86 @@
-import s from './CourseContent.module.scss';
+import React from "react";
+import styles from './CourseContent.module.scss';
 
-const blocks = [
-    { title: 'Первичные учетные документы', items: [
-            'Особенности учета у ИП, ПУД, книги',
-            'Особенности учета в отдельных видах деятельности',
-        ]},
-    { title: 'Выбор системы налогообложения' },
-    { title: 'Прием наличных денежных средств. Учет кассовых операций' },
-    { title: 'Единый налог' },
-    { title: 'Заполнение книги и декларации при ЕН' },
-    { title: 'ПН' },
-    { title: 'Заполнение книги и декларации при ПН' },
-    { title: 'Импорт и экспорт' },
-    { title: 'НДС' },
-    { title: 'Заполнение книги и декларации при НДС, выставление ЭСЧФ' },
-    { title: 'НДС на доходы иностранных организаций' },
-    { title: 'Сбор за размещение рекламы' },
-    { title: 'Маркировка товара' },
-    { title: 'Налоги, которые могут возникнуть у ИП' },
-    { title: 'Кадры', items: [
-            'Прием на работу. Заработная плата',
-            'Отчеты за наёмных сотрудников',
-        ]},
-    { title: 'Оформление бухгалтера. Действия при проверке. Исправление ошибок' },
-];
-
-function Block({ b, index }) {
-    const number = index + 1;
-    const body = b.items?.length ? (
-        <details className={s.item}>
-            <summary className={s.summary}>
-        <span className={s.heading}>
-          <span className={s.num}>{number}</span>
-            {b.title}
-        </span>
-                <span className={s.chevron} aria-hidden="true" />
-            </summary>
-            <ul className={s.sublist}>
-                {b.items.map((t, i) => <li key={i}>{t}</li>)}
-            </ul>
-        </details>
-    ) : (
-        <div className={`${s.item} ${s.plain}`}>
-            <div className={s.summary}>
-        <span className={s.heading}>
-          <span className={s.num}>{number}</span>
-            {b.title}
-        </span>
-            </div>
-        </div>
-    );
-    return body;
-}
-
-export default function CourseContent() {
-    const mid = Math.ceil(blocks.length / 2);   // 8 слева, остальное справа
-    const left = blocks.slice(0, mid);
-    const right = blocks.slice(mid);
-
+export default function TrainingProgram() {
     return (
-        <section id="course-content" className={`full ${s.section}`}>
-            <div className="container">
-                <h2 className={s.title}>Программа обучения</h2>
+        <section className={styles.wrapper} aria-labelledby="program-title">
+            <h1 id="program-title" className={styles.title}>
+                Программа обучения
+            </h1>
 
-                <div className={s.grid}>
-                    <div className={s.col}>
-                        {left.map((b, i) => <Block key={i} b={b} index={i} />)}
-                    </div>
-                    <div className={s.col}>
-                        {right.map((b, i) => <Block key={mid + i} b={b} index={mid + i} />)}
-                    </div>
-                </div>
+            {/* Прокручиваемая область */}
+            <div className={styles.scrollArea} role="region" aria-label="Содержание программы">
+                <ol className={styles.list}>
+                    <li>
+                        <h2>Вводный урок</h2>
+                    </li>
+
+                    <li>
+                        <h2>Первичные учетные документы</h2>
+                        <ul>
+                            <li>Особенности учета у ИП, ПУД, книги</li>
+                            <li>Особенности учета в отдельных видах деятельности</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>Выбор системы налогообложения. Расчет наиболее выгодной системы налогообложения.</h2>
+                    </li>
+
+                    <li>
+                        <h2>Прием наличных денежных средств и безналичный расчет</h2>
+                        <ul>
+                            <li>Учет кассовых операций.</li>
+                            <li>Учет расчетов с подотчетными лицами.</li>
+                            <li>Безналичный расчет.</li>
+                            <li>Формирование платежных поручений.</li>
+                        </ul>
+                    </li>
+
+                    <li><h2>Единый налог</h2></li>
+                    <li><h2>Заполнение книги и декларации при едином налоге</h2></li>
+                    <li><h2>Подоходный налог</h2></li>
+                    <li><h2>Заполнение книги и декларации при подоходном налоге</h2></li>
+                    <li><h2>Импорт и экспорт. Отчет оператору вторичных ресурсов.</h2></li>
+                    <li><h2>НДС. Понятие электронная счет-фактура.</h2></li>
+                    <li><h2>Заполнение книги и декларации при НДС, выставление ЭСЧФ</h2></li>
+                    <li><h2>НДС на доходы иностранных организаций</h2></li>
+                    <li><h2>Сбор за размещение рекламы</h2></li>
+                    <li><h2>Маркировка товара и электронные ТН/ТТН.</h2></li>
+
+                    <li>
+                        <h2>Налоги, которые могут возникнуть у ИП</h2>
+                        <ul className={styles.twoCols}>
+                            <li>Земельный налог</li>
+                            <li>Налог на недвижимость</li>
+                            <li>Экологический налог</li>
+                            <li>Налог на добычу природных ресурсов</li>
+                            <li>Транспортный налог</li>
+                            <li>Акцизы</li>
+                            <li>Утилизационный сбор</li>
+                            <li>Оффшорный сбор</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>Кадры</h2>
+                        <ul>
+                            <li>Прием на работу.</li>
+                            <li>Заработная плата.</li>
+                            <li>Налоги из заработной платы.</li>
+                            <li>Учет рабочего времени.</li>
+                            <li>Вычеты.</li>
+                            <li>Алименты.</li>
+                            <li>Отпускные.</li>
+                            <li>Пособия по временной нетрудоспособности.</li>
+                            <li>Отчеты за наёмных сотрудников.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>Заключительная речь</h2>
+                    </li>
+                </ol>
             </div>
         </section>
     );
