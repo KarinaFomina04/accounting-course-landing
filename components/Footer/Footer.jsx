@@ -1,50 +1,44 @@
-import React from 'react';
+import Link from 'next/link';
 import s from './Footer.module.scss';
-
 
 export default function Footer() {
     const year = new Date().getFullYear();
 
-
     return (
         <footer className={s.footer} role="contentinfo">
             <div className={s.inner}>
-                {/* Слева — список документов */}
-                <div className={s.docs}>
-                    <div>
-                        <a href="/docs/public-offer-license.pdf" target="_blank" rel="noopener noreferrer">
-                            ПУБЛИЧНАЯ ОФЕРТА на передачу неисключительных имущественных прав (лицензий)
-                        </a>
-                        <a href="/docs/internal-rules.pdf" target="_blank" rel="noopener noreferrer">
-                            ПРАВИЛА внутреннего распорядка для обучающихся
-                        </a>
-                        <a href="/docs/public-offer-education.pdf" target="_blank" rel="noopener noreferrer">
-                            Публичная оферта на обучение
-                        </a>
-                    </div>
-                    <div>
-                        <a href="/docs/privacy-policy.pdf" target="_blank" rel="noopener noreferrer">
-                            Положение о политике оператора в отношении обработки персональных данных
-                        </a>
-                        <a href="/docs/cookie-policy.pdf" target="_blank" rel="noopener noreferrer">
-                            Положение о политике в отношении обработки cookie
-                        </a>
-                        <a href="/docs/registration-certificate.pdf" target="_blank" rel="noopener noreferrer">
-                            Копия свидетельства о регистрации
-                        </a>
-                    </div>
+                {/* Бренд/описание */}
+                <div className={s.brand}>
+                    <Link href="/" className={s.logo} aria-label="KET Accountant — на главную">
+                        KET Accountant
+                    </Link>
+                    <p className={s.tagline}>
+                        Онлайн-курс по учёту и налогам для ИП в Беларуси.
+                    </p>
                 </div>
-                <address className={s.requisites} aria-label="Реквизиты">
-                    <div className={s.reqTitle}>Реквизиты</div>
-                    <div>
-                        ИП Фомина К.А.<br/>
-                        УНП: 000000000<br/>
-                        р/с: BY00UNBS00000000000000000000 в ОАО «Банк Пример»<br/>
-                        E‑mail: <a href="mailto:info@ket-accountant.by">info@ket-accountant.by</a><br/>
-                    </div>
-                </address>
+
+
+                {/* Контакты */}
+                {/*<address className={s.contacts} aria-label="Контакты">*/}
+                {/*    <a href="mailto:info@ket-accountant.by">info@ket-accountant.by</a>*/}
+                {/*    <a href="tel:+375000000000">+375 (00) 000-00-00</a>*/}
+                {/*    <div className={s.social} aria-label="Мы в соцсетях">*/}
+                {/*        <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">*/}
+                {/*            /!* иконка telegram (inline svg) *!/*/}
+                {/*            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.9 16.9l-.1 3.1c.4 0 .6-.2.8-.4l1.9-1.8 4 2.9c.7.4 1.2.2 1.4-.7l2.6-12.2v-.1c.2-.9-.3-1.3-1-1L3.2 10c-.9.4-.9 1 .2 1.3l4.7 1.5 10.8-6.8c.5-.3.9-.1.5.2l-9.5 8.7z" fill="currentColor"/></svg>*/}
+                {/*        </a>*/}
+                {/*        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">*/}
+                {/*            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5A5.5 5.5 0 116.5 13 5.5 5.5 0 0112 7.5zm0 2A3.5 3.5 0 1015.5 13 3.5 3.5 0 0012 9.5zM18 6.8a1 1 0 11-1 1 1 1 0 011-1z" fill="currentColor"/></svg>*/}
+                {/*        </a>*/}
+                {/*    </div>*/}
+                {/*</address>*/}
             </div>
-            <div className={s.copy}>© {year} KET Accountant</div>
+
+            {/* Нижняя полоска */}
+            <div className={s.bar}>
+                <span>© {year} KET Accountant</span>
+                <span className={s.muted}>Все права защищены</span>
+            </div>
         </footer>
-    )
+    );
 }

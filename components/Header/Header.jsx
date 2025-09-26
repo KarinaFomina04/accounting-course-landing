@@ -69,6 +69,7 @@ export default function Header() {
                             <Link href="/course-content" className={s.linkButton} onClick={close}>Программа курса</Link>
                             <Link href="/pricing" className={s.linkButton} onClick={close}>Тарифы</Link>
                             <Link href="/contact-form" className={s.linkButton} onClick={close}>Заказать консультацию</Link>
+                            <Link href="/info-company" className={s.linkButton} onClick={close}>О нас</Link>
                             <TelegramButton />
                         </nav>
 
@@ -115,6 +116,7 @@ export default function Header() {
                     <Link href="/course-content" className={s.mLink} onClick={close}>Программа курса</Link>
                     <Link href="/pricing" className={s.mLink} onClick={close}>Тарифы</Link>
                     <Link href="/contact-form" className={s.linkButton} onClick={close}>Заказать консультацию</Link>
+                    <Link href="/info-company" className={s.linkButton} onClick={close}>О нас</Link>
                 </nav>
             </Portal>
         </>

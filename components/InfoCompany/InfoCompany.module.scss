@@ -1,0 +1,84 @@
+.wrapper {
+  padding: 48px 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 0 16px;
+}
+
+.title {
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.docs {
+  margin-top: 24px;
+}
+
+.docsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docCol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li + li {
+    margin-top: 12px;
+  }
+
+  a {
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+    transition: opacity .2s ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.7;
+    }
+  }
+}
+
+.requisitesSection {
+  margin-top: 40px;
+}
+
+.requisites {
+  display: block;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.reqTitle {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.reqBody a {
+  text-decoration: underline;
+}
+
+.copy {
+  margin-top: 40px;
+  opacity: 0.7;
+  font-size: 14px;
+}
